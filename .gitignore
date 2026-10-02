@@ -2,15 +2,23 @@
 node_modules/
 api/node_modules/
 app/node_modules/
+.npm/
 
 # Environment variables & secrets
 .env
-api/.env
-app/.env
-*.env
+.env.*
 !.env.example
+api/.env
+api/.env.*
 !api/.env.example
+app/.env
+app/.env.*
 !app/.env.example
+*.env
+*.pem
+*.key
+*.keystore
+*.jks
 
 # Build and distribution outputs
 dist/
@@ -22,19 +30,14 @@ app/build/
 app/web-build/
 app/.expo/
 app/.expo-shared/
+out/
 
-# Android build outputs & local properties (if prebuilt)
-app/android/app/build/
-app/android/build/
-app/android/.gradle/
-app/android/local.properties
-app/android/.cxx/
-
-# iOS build outputs & Pods (if prebuilt)
-app/ios/Pods/
-app/ios/build/
-app/ios/*.xcworkspace
-app/ios/*.xcodeproj
+# Prebuilt Native Directories (Expo Managed Workflow)
+app/android/
+app/ios/
+*.apk
+*.aab
+*.dex
 
 # Logs & Temporary files
 *.log
@@ -43,12 +46,16 @@ yarn-debug.log*
 yarn-error.log*
 lerna-debug.log*
 .pnpm-debug.log*
+*.tmp
+*.temp
 
 # Editor & OS Metadata
 .idea/
 .vscode/
 *.swp
 *.swo
+*.iml
 .DS_Store
 Thumbs.db
 ehthumbs.db
+desktop.ini
