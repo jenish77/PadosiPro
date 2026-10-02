@@ -1,0 +1,54 @@
+# Dependency directories
+node_modules/
+api/node_modules/
+app/node_modules/
+
+# Environment variables & secrets
+.env
+api/.env
+app/.env
+*.env
+!.env.example
+!api/.env.example
+!app/.env.example
+
+# Build and distribution outputs
+dist/
+api/dist/
+build/
+api/build/
+app/dist/
+app/build/
+app/web-build/
+app/.expo/
+app/.expo-shared/
+
+# Android build outputs & local properties (if prebuilt)
+app/android/app/build/
+app/android/build/
+app/android/.gradle/
+app/android/local.properties
+app/android/.cxx/
+
+# iOS build outputs & Pods (if prebuilt)
+app/ios/Pods/
+app/ios/build/
+app/ios/*.xcworkspace
+app/ios/*.xcodeproj
+
+# Logs & Temporary files
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+.pnpm-debug.log*
+
+# Editor & OS Metadata
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+ehthumbs.db

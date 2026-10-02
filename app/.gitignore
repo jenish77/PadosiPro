@@ -1,0 +1,28 @@
+# Dependency directories
+node_modules/
+
+# Environment variables & secrets
+.env
+*.env
+!.env.example
+
+# Expo & build outputs
+.expo/
+.expo-shared/
+dist/
+build/
+web-build/
+
+# Android native build
+android/app/build/
+android/build/
+android/.gradle/
+android/local.properties
+android/.cxx/
+
+# iOS native build
+ios/Pods/
+ios/build/
+
+# Logs
+*.log

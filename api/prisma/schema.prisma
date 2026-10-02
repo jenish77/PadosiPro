@@ -1,0 +1,80 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model User {
+  id                    String            @id @default(uuid())
+  email                 String            @unique
+  passwordHash          String
+  isVerified            Boolean           @default(false)
+  hasCompletedProfile   Boolean           @default(false)
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+
+  otpVerification       OtpVerification?
+  profile               UserProfile?
+  taskSelections        UserTaskSelection[]
+}
+
+model OtpVerification {
+  id                    String            @id @default(uuid())
+  userId                String            @unique
+  user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  codeHash              String
+  attempts              Int               @default(0)
+  resendAfter           DateTime
+  expiresAt             DateTime
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+}
+
+model UserProfile {
+  id                    String            @id @default(uuid())
+  userId                String            @unique
+  user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name                  String
+  mobileNumber          String            // Indian format +91XXXXXXXXXX
+  address               String
+  societyBuilding       String?           // Optional
+  flatUnit              String?           // Optional
+  businessName          String?           // Optional
+  createdAt             DateTime          @default(now())
+  updatedAt             DateTime          @updatedAt
+}
+
+model TaskCategory {
+  id                    String            @id @default(uuid())
+  name                  String            @unique
+  description           String
+  iconName              String
+  displayOrder          Int               @default(0)
+  tasks                 Task[]
+}
+
+model Task {
+  id                    String            @id @default(uuid())
+  categoryId            String
+  category              TaskCategory      @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  name                  String
+  description           String
+  iconName              String            @default("check-circle")
+  createdAt             DateTime          @default(now())
+
+  userSelections        UserTaskSelection[]
+}
+
+model UserTaskSelection {
+  id                    String            @id @default(uuid())
+  userId                String
+  user                  User              @relation(fields: [userId], references: [id], onDelete: Cascade)
+  taskId                String
+  task                  Task              @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  selectedAt            DateTime          @default(now())
+
+  @@unique([userId, taskId])
+}
